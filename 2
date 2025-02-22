@@ -7,19 +7,16 @@
 SECRET_KEY=8KjP2mNx7vL9qR4t
 SUBNET=172.20.0.0/24
 DOMAIN=mail.innerinfo.com
-HOSTNAMES=mail.innerinfo.com,innerinfo.com,innerinfo.io
+HOSTNAMES=mail.innerinfo.com,innerinfo.com
 POSTMASTER=admin
-TLS_FLAVOR=cert  # cert로 변경 (수동 인증서 사용)
+TLS_FLAVOR=cert  # cert, letsencrypt, notls 중 선택
 AUTH_RATELIMIT_IP=5/hour
 AUTH_RATELIMIT_USER=50/day
 DISABLE_STATISTICS=True
 
-
-
-
 # Admin account automatic creation
 INITIAL_ADMIN_ACCOUNT=hwlim
-INITIAL_ADMIN_DOMAIN=innerinfo.com
+INITIAL_ADMIN_DOMAIN=mail.innerinfo.com
 INITIAL_ADMIN_PW=Berea6922!!
 INITIAL_ADMIN_MODE=ifmissing
 
@@ -28,7 +25,7 @@ INITIAL_ADMIN_MODE=ifmissing
 ###################################
 
 ADMIN=true
-WEBMAIL=roundcube
+WEBMAIL=roundcube  # roundcube, rainloop, none 중 선택
 API=false
 WEBDAV=none
 ANTIVIRUS=none
@@ -40,7 +37,7 @@ SCAN_MACROS=true
 
 MESSAGE_SIZE_LIMIT=50000000
 MESSAGE_RATELIMIT=200/day
-RELAYNETS=192.168.0.0/16,172.0.0.0/8,10.0.0.8/
+RELAYNETS=
 RELAYHOST=
 FETCHMAIL_ENABLED=False
 FETCHMAIL_DELAY=600
@@ -60,10 +57,23 @@ FULL_TEXT_SEARCH=en
 
 WEBROOT_REDIRECT=/admin
 WEB_ADMIN=/admin
-WEB_WEBMAIL=/webmail
+WEB_WEBMAIL=/webmail  # 웹메일 접속 경로
 WEB_API=/api
 SITENAME=innerinfo
 WEBSITE=https://mail.innerinfo.com
+
+###################################
+# Roundcube settings
+###################################
+
+# 활성화할 Roundcube 플러그인 설정
+ROUNDCUBE_PLUGINS=archive,carddav,enigma,mailu,managesieve,markasjunk,zipdownload
+
+# 프록시 인증 설정 (헤더 기반 인증)
+PROXY_AUTH_WHITELIST=192.168.9.0/24  # 신뢰할 프록시 CIDR
+PROXY_AUTH_HEADER=X-Auth-Email       # 인증 헤더
+PROXY_AUTH_CREATE=False              # 존재하지 않는 계정 자동 생성 비활성화
+PROXY_AUTH_LOGOUT_URL=               # 로그아웃 후 리디렉션 URL (기본값: 없음)
 
 ###################################
 # Advanced settings
