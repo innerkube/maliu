@@ -1,0 +1,7 @@
+certs/
+data/
+filter/
+mail/
+mailqueue/
+redis/
+backup/
